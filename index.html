@@ -12,15 +12,6 @@
 </head>
 
 <body>
-  <!-- Topbar -->
-  <!-- <div id="controls">
-    <button id="print_button">Record Video</button>
-  </div> -->
-  <!-- End topbar -->
-
-  <!-- Webview -->
-  <!-- <div style="padding: 40px 40px 40px 140px;    background-image: url(./assets/frame-horizontal.png);    background-repeat: no-repeat;    background-size: 100% 100%; width: calc(100vw - 180px);
-    height: calc(100dvh - 80px);"> -->
   <div
     style="display: flex; align-items: center; justify-content: flex-end;background-image: url(./assets/bg-horizontal.png); background-repeat: no-repeat; background-size: 100% 100%; position: relative; width: 100%; height: 100%;">
     <div style="position: relative; width: 70vw; height: 80vh">
@@ -32,13 +23,21 @@
       <div
         style="position: absolute; background-image: url(./assets/frame-horizontal.png); background-repeat: no-repeat; background-size: 100% 100%; inset: 0;">
       </div>
+
+      <div id="timer"
+        style="visibility: hidden; display: flex; align-items: center; justify-content: center; position: absolute; inset: 0; background: rgba(0,0,0,.5);">
+        <p
+          style="font-size: 50px; color: white; transform: rotate(-90deg); transform-origin: center; width: fit-content; height: fit-content; margin: auto;">
+          Capturing in
+          <span id="timer-count">1</span>
+        </p>
+      </div>
     </div>
     <div style="display: flex; flex-direction: column; gap: 20px; padding: 20px;">
       <button id="capture"
         style="transform: rotate(-90deg); background-color: white; color: gold; border: 0; border-radius: 20px; font-weight: bold; text-transform: uppercase; padding: 8px 12px;">Capture</button>
     </div>
   </div>
-  <!-- </div> -->
 </body>
 
 </html>

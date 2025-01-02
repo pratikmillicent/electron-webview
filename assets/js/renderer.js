@@ -27,14 +27,25 @@ window.addEventListener("DOMContentLoaded", () => {
     document
       .querySelector("#capture")
       .addEventListener("click", function () {
+        let counter = 3;
+        const timer = document.getElementById("timer");
+        const timerCount = document.getElementById("timer-count");
+        let timerInterval;
         const webview = document.querySelector('webview')
         webview.addEventListener('ipc-message', (event) => {
           switch (event.channel) {
-            case "recording":
-              this.innerText = "Recording Video...";
+            case "capturing":
+              timer.style.visibility = "visible";
+              timerCount.innerText = counter;
+              timerInterval = setInterval(() => {
+                counter -= 1;
+                timerCount.innerText = counter;
+              }, 1000)
               break;
-            case "complete":
-              this.innerText = "Record Video";
+            case "captured":
+              timer.style.visibility = "hidden";
+              timerCount.innerText = 3;
+              clearInterval(timerInterval);
               break;
           }
         })
