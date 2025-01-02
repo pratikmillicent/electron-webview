@@ -1,0 +1,44 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- <link rel="stylesheet" href="assets/css/topbar.css" /> -->
+
+  <link rel="stylesheet" href="assets/css/no-topbar.css">
+  <script defer src="assets/js/renderer.js"></script>
+  <meta charset="UTF-8" />
+  <title>AR Wings</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+
+<body>
+  <!-- Topbar -->
+  <!-- <div id="controls">
+    <button id="print_button">Record Video</button>
+  </div> -->
+  <!-- End topbar -->
+
+  <!-- Webview -->
+  <!-- <div style="padding: 40px 40px 40px 140px;    background-image: url(./assets/frame-horizontal.png);    background-repeat: no-repeat;    background-size: 100% 100%; width: calc(100vw - 180px);
+    height: calc(100dvh - 80px);"> -->
+  <div
+    style="display: flex; align-items: center; justify-content: flex-end;background-image: url(./assets/bg-horizontal.png); background-repeat: no-repeat; background-size: 100% 100%; position: relative; width: 100%; height: 100%;">
+    <div style="position: relative; width: 70vw; height: 80vh">
+      <webview style="width: 100%;
+            height: 100%;" autosize="on" src="https://lens.snap.com/experience/23ea0041-84f6-4c41-8595-112cadba8899"
+        id="webview" data-home="https://lens.snap.com/experience/23ea0041-84f6-4c41-8595-112cadba8899"
+        preload="./inject.js"></webview>
+
+      <div
+        style="position: absolute; background-image: url(./assets/frame-horizontal.png); background-repeat: no-repeat; background-size: 100% 100%; inset: 0;">
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 20px; padding: 20px;">
+      <button id="capture"
+        style="transform: rotate(-90deg); background-color: white; color: gold; border: 0; border-radius: 20px; font-weight: bold; text-transform: uppercase; padding: 8px 12px;">Capture</button>
+    </div>
+  </div>
+  <!-- </div> -->
+</body>
+
+</html>
