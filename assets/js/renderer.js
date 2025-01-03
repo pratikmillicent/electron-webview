@@ -33,10 +33,13 @@ window.addEventListener("DOMContentLoaded", () => {
         const timer = document.getElementById("timer");
         const timerCount = document.getElementById("timer-count");
         let timerInterval;
+
         const webview = document.querySelector('webview')
         webview.addEventListener('ipc-message', async (event) => {
           switch (event.channel) {
             case "capturing":
+              this.disabled = true;
+              this.innerText = "Say Cheese 😃"
               timer.style.visibility = "visible";
               timerCount.innerText = counter;
               timerInterval = setInterval(() => {
@@ -45,6 +48,7 @@ window.addEventListener("DOMContentLoaded", () => {
               }, 1000)
               break;
             case "captured":
+              this.innerText = "Processing please wait... ⏳"
               timer.style.visibility = "hidden";
               timerCount.innerText = 3;
               clearInterval(timerInterval);
@@ -61,6 +65,8 @@ window.addEventListener("DOMContentLoaded", () => {
                 redirect: "follow"
               })
 
+              this.disabled = false;
+              this.innerText = "Capture"
               ipcRenderer.send('switch-page', 'output', { filename });
               break;
           }

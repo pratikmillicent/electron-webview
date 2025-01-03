@@ -56,8 +56,6 @@ app.post('/upload', upload.single('file'), async (req, res) => {
   const readableStream = new stream.PassThrough();
   readableStream.end(req.file.buffer);
 
-  console.log(readableStream)
-
   // Upload file to FTP using the received file buffer
   await uploadToFTP(readableStream, req.file.originalname);
   res.send('File uploaded to FTP successfully');
