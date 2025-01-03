@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron');
+
 const getControlsHeight = () => {
   const controls = document.querySelector("#controls");
   if (controls) {
@@ -51,12 +53,15 @@ window.addEventListener("DOMContentLoaded", () => {
                 .then(res => res.blob())
 
               const formData = new FormData();
-              formData.append("file", blob, new Date().toISOString() + ".png");
-              fetch("http://localhost:3000/upload", {
+              const filename = (Math.random() + 1).toString(36).substring(7) + ".png";
+              formData.append("file", blob, filename);
+              await fetch("http://localhost:3000/upload", {
                 method: "POST",
                 body: formData,
                 redirect: "follow"
               })
+
+              ipcRenderer.send('switch-page', 'output', { filename });
               break;
           }
         })

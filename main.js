@@ -1,5 +1,5 @@
 // Electron
-const { app, Menu } = require("electron");
+const { app, Menu, ipcMain } = require("electron");
 
 // Import the Express server
 require('./server');
@@ -10,7 +10,13 @@ app.whenReady().then(() => {
   mainWindow = window.createBrowserWindow(app);
 
   // Option 1: Uses Webtag and load a custom html file with external content
-  mainWindow.loadFile("index.html");
+  mainWindow.loadFile("start.html");
+
+  ipcMain.on('switch-page', (event, page, query) => {
+    mainWindow.loadFile(`${page}.html`, {
+      query,
+    });
+  });
 
   Menu.setApplicationMenu(null);
 });

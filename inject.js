@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener("click", tapHandler);
 
   let showCamOptions = false;
+  document.querySelector(".fullscreen").childNodes[0].childNodes[0].style.visibility = showCamOptions ? "visible" : "hidden"
   let tapedTwice = false;
 
   function tapHandler(event) {
@@ -41,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
    event.preventDefault();
    //action on double tap goes below
    showCamOptions = !showCamOptions;
-   document.querySelector(".fullscreen").childNodes[0].childNodes[0].style.visibility = showCamOptions ? "hidden" : "visible"
+   document.querySelector(".fullscreen").childNodes[0].childNodes[0].style.visibility = showCamOptions ? "visible" : "hidden"
   }
 
 
