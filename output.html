@@ -9,20 +9,21 @@
 
 <body style="margin: 0; padding: 0; box-sizing: border-box;">
  <div
-  style="display: flex; align-items: center; justify-content: flex-end;background-image: url(./assets/bg-horizontal.png); background-repeat: no-repeat; background-size: 100% 100%; position: relative; width: 100vw; height: 100vh;">
-  <img id="image"
-   style="width: 80vh;height: 70vw;transform: rotate(-90deg);transform-origin: center;position: absolute;left: 60vh;" />
-  <div style="display: flex; flex-direction: column; gap: 20px; margin-right: 5%;">
-   <div id="qr-code"></div>
-   <a href="./start.html">
-    <svg style="transform: rotate(-90deg);" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-     <g id="SVGRepo_iconCarrier">
-      <path d="M1 6V15H6V11C6 9.89543 6.89543 9 8 9C9.10457 9 10 9.89543 10 11V15H15V6L8 0L1 6Z" fill="#FFD700"></path>
-     </g>
-    </svg>
-   </a>
+  style="display: flex; align-items: center; justify-content: center; gap: 20px; background-image: url(./assets/bg-horizontal.png); background-repeat: no-repeat; background-size: 100% 100%; position: relative; width: 100vw; height: 100vh;">
+  <div style="transform: rotate(-90deg);">
+   <img id="image" style="width: 80vh;height: 70vw;" />
+   <div style="display: flex;gap: 20px;align-items: center;justify-content: center;padding-top: 20px;">
+    <a href="./start.html">
+     <svg style="width: 100px; height: 100px;" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+       <path d="M1 6V15H6V11C6 9.89543 6.89543 9 8 9C9.10457 9 10 9.89543 10 11V15H15V6L8 0L1 6Z" fill="#FFD700"></path>
+      </g>
+     </svg>
+    </a>
+    <div id="qr-code"></div>
+   </div>
   </div>
  </div>
 
