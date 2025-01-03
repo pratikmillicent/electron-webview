@@ -32,7 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
         const timerCount = document.getElementById("timer-count");
         let timerInterval;
         const webview = document.querySelector('webview')
-        webview.addEventListener('ipc-message', (event) => {
+        webview.addEventListener('ipc-message', async (event) => {
           switch (event.channel) {
             case "capturing":
               timer.style.visibility = "visible";
@@ -46,30 +46,21 @@ window.addEventListener("DOMContentLoaded", () => {
               timer.style.visibility = "hidden";
               timerCount.innerText = 3;
               clearInterval(timerInterval);
+
+              const blob = await fetch(event.args)
+                .then(res => res.blob())
+
+              const formData = new FormData();
+              formData.append("file", blob, new Date().toISOString() + ".png");
+              fetch("http://localhost:3000/upload", {
+                method: "POST",
+                body: formData,
+                redirect: "follow"
+              })
               break;
           }
         })
         webview.send('ping')
       })
-  }
-
-  // Print button exits
-  if (document.querySelector("#print_button")) {
-    document
-      .querySelector("#print_button")
-      .addEventListener("click", function () {
-        const webview = document.querySelector('webview')
-        webview.addEventListener('ipc-message', (event) => {
-          switch (event.channel) {
-            case "recording":
-              this.innerText = "Recording Video...";
-              break;
-            case "complete":
-              this.innerText = "Record Video";
-              break;
-          }
-        })
-        webview.send('ping')
-      });
   }
 });

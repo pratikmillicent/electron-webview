@@ -10,15 +10,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const canvas = document.querySelector("canvas");
   canvas.style.borderRadius = "0";
-  document.body.style.overflow = "hidden";
-  canvas.style.height = "100vh";
-  document.querySelector(".fullscreen").childNodes[0].childNodes[0].remove()
+  canvas.style.position = "absolute";
+  canvas.style.inset = "0";
+  // document.querySelector(".fullscreen").childNodes[0].childNodes[0].remove()
+  // document.querySelector(".fullscreen").childNodes[0].childNodes[0].childNodes[0].remove()
+  // document.querySelector(".fullscreen").childNodes[0].childNodes[0].childNodes[1].remove()
+  // document.querySelector(".fullscreen").childNodes[0].className = ""
+  // document.querySelector(".fullscreen").childNodes[0].childNodes[0].className = ""
   document.querySelector(".fullscreen").childNodes[0].childNodes[0].childNodes[0].remove()
-  document.querySelector(".fullscreen").childNodes[0].childNodes[0].childNodes[1].remove()
-  document.querySelector(".fullscreen").childNodes[0].className = ""
-  document.querySelector(".fullscreen").childNodes[0].childNodes[0].className = ""
+  document.querySelector(".fullscreen").childNodes[0].childNodes[1].childNodes[0].remove()
+  document.querySelector(".fullscreen").childNodes[0].childNodes[1].childNodes[1].remove()
+  document.querySelector(".fullscreen").childNodes[0].childNodes[1].classList = ""
+  document.querySelector(".fullscreen").childNodes[0].classList = ""
+  document.querySelector(".fullscreen").childNodes[0].childNodes[0].classList = ""
+  document.querySelector(".fullscreen").childNodes[0].childNodes[0].style = "position: absolute; transform: rotate(-90deg) translate(-100%, 100%); transform-origin: left; left: 10%;top: 10%; z-index: 10;"
 
   const newCanvas = document.createElement("canvas");
+
+  window.addEventListener("click", tapHandler);
+
+  let showCamOptions = false;
+  let tapedTwice = false;
+
+  function tapHandler(event) {
+   if (!tapedTwice) {
+    tapedTwice = true;
+    setTimeout(function () { tapedTwice = false; }, 300);
+    return false;
+   }
+   event.preventDefault();
+   //action on double tap goes below
+   showCamOptions = !showCamOptions;
+   document.querySelector(".fullscreen").childNodes[0].childNodes[0].style.visibility = showCamOptions ? "hidden" : "visible"
+  }
+
 
   ipcRenderer.on('ping', () => {
    ipcRenderer.sendToHost("capturing");
@@ -39,22 +64,16 @@ document.addEventListener('DOMContentLoaded', function () {
     frameImg.onload = function () {
      newContext.drawImage(frameImg, -canvas.width / 2, -canvas.height / 2);
 
+     document.body.removeChild(frameImg);
+
      const dataURL = newCanvas.toDataURL('image/png')
-     const recording_url = dataURL.replace(/^data:image\/png/, 'data:application/octet-stream');
-     // Attach the object URL to an <a> element, setting the download file name
-     const a = document.createElement('a');
-     a.style = "display: none;";
-     a.href = recording_url;
-     a.download = new Date().toISOString() + ".png";
-     document.body.appendChild(a);
-     // Trigger the file download
-     a.click();
-     ipcRenderer.sendToHost("captured");
+
+     ipcRenderer.sendToHost("captured", dataURL);
     };
     frameImg.src = frame;
 
     setTimeout(() => {
-     URL.revokeObjectURL(recording_url);
+     URL.revokeObjectURL(dataURL);
      document.body.removeChild(a);
     }, 0);
    }, 3000)
